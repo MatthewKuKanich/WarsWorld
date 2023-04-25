@@ -6,14 +6,14 @@ const axisConnectionsSchema = z.enum(["right-left", "top-bottom"]);
 const oneWayConnectionsSchema = z.enum(["top", "right", "bottom", "left"]);
 
 const twoWayConnectionsSchema = axisConnectionsSchema.or(
-  z.enum(["top-right", "right-bottom", "bottom-left", "top-left"]),
+  z.enum(["top-right", "right-bottom", "bottom-left", "left-top"]),
 );
 
 const threeWayConnectionSchema = z.enum([
   "right-bottom-left",
-  "top-right-bottom",
-  "top-bottom-left",
-  "top-right-left",
+  "top-left-bottom",
+  "left-top-right",
+  "bottom-right-top",
 ]);
 
 const fourWayConnectionSchema = z.literal("top-right-bottom-left");
@@ -36,7 +36,7 @@ export const pipeTileSchema = canHaveUnitSchema.extend({
 });
 
 export const pipeSeamTileSchema = canHaveUnitSchema.extend({
-  type: z.literal("pipeSeam"),
+  type: z.literal("pipe-seam"),
   variant: axisConnectionsSchema,
   hp: z.number().min(1).max(100),
 });
@@ -53,7 +53,7 @@ export const plainTileSchema = canHaveUnitSchema.extend({
 export const riverTileSchema = canHaveUnitSchema.extend({
   type: z.literal("river"),
   // TODO rivers have MANY more variants with flow direction and all
-  variant: twoWayConnectionsSchema.or(threeWayConnectionSchema),
+  variant: twoWayConnectionsSchema.or(threeWayConnectionSchema).or(fourWayConnectionSchema),
 });
 
 export const variableTileSchema = z.discriminatedUnion("type", [

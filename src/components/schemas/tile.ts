@@ -5,8 +5,8 @@ import { variableTileSchema } from "./variable-tiles";
 /**
  * `-1` is neutral
  */
-export const playerSlotForPropertiesSchema = z.number().min(-1).max(7);
-export const playerSlotForUnitsSchema = z.number().min(0).max(7);
+export const playerSlotForPropertiesSchema = z.number().min(-1).max(15);
+export const playerSlotForUnitsSchema = z.number().min(0).max(15);
 
 export type PlayerSlot = z.infer<typeof playerSlotForPropertiesSchema>;
 
