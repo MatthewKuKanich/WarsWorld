@@ -18,3 +18,6 @@ tsconfig.tsbuildinfo
 
 *.db
 *.db-journal
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/*
+/.idea/vcs.xml
